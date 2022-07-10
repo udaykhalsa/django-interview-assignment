@@ -7,6 +7,7 @@ USER_ROLE = (
     ('member', 'Member')
 )
 
+
 class UserRegistrationSerializer(serializers.Serializer):
     username = serializers.CharField()
     name = serializers.CharField()
@@ -25,7 +26,8 @@ class UserRegistrationSerializer(serializers.Serializer):
             user = None
 
         if user:
-            raise serializers.ValidationError('User with given username already exists.')
+            raise serializers.ValidationError(
+                'User with given username already exists.')
 
         if password != confirm_password:
             raise serializers.ValidationError('Passwords do not match.')
@@ -45,9 +47,10 @@ class UserLoginSerializer(serializers.Serializer):
             user = User.objects.get(username=username)
         except:
             user = None
-        
+
         if not user:
-            raise serializers.ValidationError('User with given username does not exists.')
+            raise serializers.ValidationError(
+                'User with given username does not exists.')
 
         if not user.is_active:
             raise serializers.ValidationError('User account is not active.')
@@ -56,6 +59,7 @@ class UserLoginSerializer(serializers.Serializer):
             raise serializers.ValidationError('Incorrect password.')
 
         return data
+
 
 class UserDeactivateSerializer(serializers.Serializer):
     user_id = serializers.IntegerField()
@@ -69,17 +73,13 @@ class UserDeactivateSerializer(serializers.Serializer):
             user = None
 
         if not user:
-            raise serializers.ValidationError('User with given ID does not exists.')
-    
+            raise serializers.ValidationError(
+                'User with given ID does not exists.')
+
+        if user.role == 'librarian':
+            raise serializers.ValidationError("You don't have permission to remove this account.")
+
         if not user.is_active:
             raise serializers.ValidationError('User is already deactivated.')
 
         return data
-
-
-class MemberSerializer(serializers.ModelField):
-    class Meta:
-        model = User
-        fields = '__all__'
-
-

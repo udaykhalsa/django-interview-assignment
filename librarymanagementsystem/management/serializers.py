@@ -5,10 +5,17 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Books
         fields = ('id', 'name', 'author', 'availability_status', 'borrower')
         lookup_field = 'id'
+
+
+class MemberSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'name', 'role')
 
 

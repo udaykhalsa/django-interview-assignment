@@ -55,7 +55,7 @@ class User(AbstractBaseUser):
         return self.name
 
     def __str__(self):
-        return self.email_id
+        return self.username
 
     def has_perm(self, perm):
         return True

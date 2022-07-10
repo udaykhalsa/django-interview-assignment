@@ -1,0 +1,542 @@
+{
+	"info": {
+		"_postman_id": "39b3bb35-15d3-497e-85ad-5f70c27ef357",
+		"name": "DjangoInterviewAssignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14707308"
+	},
+	"item": [
+		{
+			"name": "User Registration",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "uday",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "uday",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "librarian",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "something",
+							"type": "text"
+						},
+						{
+							"key": "confirm_password",
+							"value": "something",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/user-signup/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user-signup",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "uday3",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "something",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/user-login/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user-login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Book",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token d5d6e12801ada946b67092d3931dfc3ed6966cfa",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Harry Potter",
+							"type": "text"
+						},
+						{
+							"key": "author",
+							"value": "JK Rowling",
+							"type": "text"
+						},
+						{
+							"key": "availability_status",
+							"value": "available",
+							"type": "text"
+						},
+						{
+							"key": "borrower",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/add-book/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"add-book",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Book and Status",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token de40d4d0f013abb2c20858a0ab1da71eaa8fa20c",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Harry Potter",
+							"type": "text"
+						},
+						{
+							"key": "author",
+							"value": "JK Rowling",
+							"type": "text"
+						},
+						{
+							"key": "availability_status",
+							"value": "borrowed",
+							"type": "text"
+						},
+						{
+							"key": "borrower",
+							"value": "uday",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/update-book/2/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"update-book",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View All Books",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token d5d6e12801ada946b67092d3931dfc3ed6966cfa",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/show-books/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"show-books",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove Book",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token de40d4d0f013abb2c20858a0ab1da71eaa8fa20c",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/remove-book/1/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"remove-book",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show All Members",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token cfccdef644e51db7b92bf9913a8eaef36454b354",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/all-member/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"all-member",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Member",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token d5d6e12801ada946b67092d3931dfc3ed6966cfa",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "uday3",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "uday3",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "something",
+							"type": "text"
+						},
+						{
+							"key": "confirm_password",
+							"value": "something",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/add-member/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"add-member",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Member",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token cfccdef644e51db7b92bf9913a8eaef36454b354",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "uday5",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "uday3",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/update-member/4/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"update-member",
+						"4",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove Member",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token cfccdef644e51db7b92bf9913a8eaef36454b354",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user_id",
+							"value": "4",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/remove-member/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"remove-member",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show Borrowed Books",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token acfd02132b779ce56e36b66acb700cde4d7068f9",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/show-borrowed-books/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"show-borrowed-books",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrow Book",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token d5d6e12801ada946b67092d3931dfc3ed6966cfa",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/borrow-book/1/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"borrow-book",
+						"1",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Return Book",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token d5d6e12801ada946b67092d3931dfc3ed6966cfa",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/return-book/1/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"return-book",
+						"1",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Member Delete Account",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/deactivate-user/1/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"deactivate-user",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
