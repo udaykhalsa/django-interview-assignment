@@ -10,7 +10,7 @@ USER_ROLE = (
 class UserRegistrationSerializer(serializers.Serializer):
     username = serializers.CharField()
     name = serializers.CharField()
-    role = serializers.ChoiceField(choices=USER_ROLE)
+    role = serializers.ChoiceField(choices=USER_ROLE, required=False)
     password = serializers.CharField()
     confirm_password = serializers.CharField()
 
@@ -75,5 +75,11 @@ class UserDeactivateSerializer(serializers.Serializer):
             raise serializers.ValidationError('User is already deactivated.')
 
         return data
+
+
+class MemberSerializer(serializers.ModelField):
+    class Meta:
+        model = User
+        fields = '__all__'
 
 

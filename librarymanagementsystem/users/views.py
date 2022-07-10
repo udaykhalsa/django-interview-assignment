@@ -1,12 +1,12 @@
-from urllib import response
 from rest_framework.views import APIView
 from django.contrib.auth import get_user_model
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, generics
 from rest_framework.authtoken.models import Token
 from .permissions import IsLibrarian
-from .serializers import UserDeactivateSerializer, UserRegistrationSerializer, UserLoginSerializer
+from .serializers import (UserDeactivateSerializer, UserRegistrationSerializer, 
+                        UserLoginSerializer, MemberSerializer)
 
 User = get_user_model()
 
@@ -51,7 +51,7 @@ class UserRegistrationView(APIView):
 
             response_content  = {
                 'status': True,
-                'message': 'User registered successfully.',
+                'message': 'Unable to create user.',
                 'result': serializer.errors
             }
 
@@ -131,4 +131,52 @@ class UserDeactivateView(APIView):
 
             return Response(response_content, status=status.HTTP_400_BAD_REQUEST)
 
-            
+class AddMemberView(APIView):
+    permission_classes = (IsAuthenticated, IsLibrarian)
+    serializer_class = UserRegistrationSerializer
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+
+        if serializer.is_valid():
+            username = request.data.get('username')
+            name = request.data.get('password')
+            password = request.data.get('password')
+
+            user = User.objects.create(
+                username = username,
+                name = name,
+                role = 'member',
+            )
+
+            user.set_password(password)
+            user.save()
+        
+            content = {
+                'username': user.username,
+                'name': user.name,
+                'role': user.role
+            }
+
+            response_content  = {
+                'status': True,
+                'message': 'User Added successfully.',
+                'result': content
+            }
+
+            return Response(response_content, status=status.HTTP_200_OK)
+        else:
+            response_content  = {
+                'status': True,
+                'message': 'Unable to create user.',
+                'result': serializer.errors
+            }
+
+            return Response(response_content, status=status.HTTP_400_BAD_REQUEST)
+
+class UpdateMemberView(generics.UpdateAPIView):
+    queryset = User.objects.all()
+    lookup_url_kwarg = "id"
+    serializer_class = MemberSerializer
+    permission_classes = (IsAuthenticated, IsLibrarian)
+
