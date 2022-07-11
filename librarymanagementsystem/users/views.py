@@ -3,7 +3,8 @@ from django.contrib.auth import get_user_model
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status, generics
-from rest_framework.authtoken.models import Token
+# from rest_framework.authtoken.models import Token
+from rest_framework_simplejwt.tokens import RefreshToken
 from .permissions import IsLibrarian, IsMember
 from .serializers import (UserDeactivateSerializer, UserRegistrationSerializer,
                           UserLoginSerializer)
@@ -71,13 +72,16 @@ class UserLoginView(APIView):
 
             user = User.objects.get(username=username)
 
-            token, created = Token.objects.get_or_create(user=user)
-
+            # token, created = Token.objects.get_or_create(user=user)
+            token = RefreshToken.for_user(user)
             content = {
-                'token': token.key,
                 'username': user.username,
                 'name': user.name,
-                'role': user.role
+                'role': user.role,
+                'token': {
+                    'refresh': str(token),
+                    'access': str(token.access_token)
+                },
             }
 
             response_content = {
